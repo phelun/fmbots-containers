@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('FmbotsDecDemo') {
+        stage('FmDecDemo') {
             steps {
-                echo 'jkjkkx'
+                echo 'Hello, World!'
             }
         }
     }
