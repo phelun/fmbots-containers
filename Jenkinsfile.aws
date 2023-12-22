@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
 
-@Library("devops-gsl-pipelines")_
+// @Library("devops-gsl-pipelines")_
 def containerBuildStages = [failFast: false]
 String branchName = env.CHANGE_ID ? env.CHANGE_BRANCH : env.BRANCH_NAME
