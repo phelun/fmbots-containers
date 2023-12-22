@@ -1,20 +1,5 @@
-pipeline {
-    agent any
+#!/usr/bin/env groovy
 
-    stages {
-        stage('FmbotsDecDemo') {
-            steps {
-                echo 'Hello, World!'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'This will run if the pipeline succeeds.'
-        }
-        failure {
-            echo 'This will run if the pipeline fails.'
-        }
-    }
-}
+@Library("devops-gsl-pipelines")_
+def containerBuildStages = [failFast: false]
+String branchName = env.CHANGE_ID ? env.CHANGE_BRANCH : env.BRANCH_NAME
