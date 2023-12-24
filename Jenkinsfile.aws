@@ -1,25 +1,35 @@
-pipeline {
-    agent any
+def branch = (env.CHANGE_ID) ? env.CHANGE_BRANCH : env.BRANCH_NAME;
+def changes = []
+def whatToBuild = []
+def gitHash
 
-    stages {
-        stage('FmDecDemo') {
-            steps {
-                echo 'Hello, World!'
-            }
-        }
-        stage('FigoMina') {
-            steps {
-                echo 'Trying this out'
-            }
-        }        
+def getPRChangelog() {
+    return sh(
+            script: "git --no-pager diff origin/master --name-only",
+            returnStdout: true
+    ).split('\n')
+}
+
+def getChangedDirectories(changeLog) {
+    return changeLog
+        .findAll{ it.contains("/") } // Must be directory
+        .collect{ it.split("/").init().join("/") } // Skip filename
+        .unique()
+}
+
+node("master") {
+    stage("Discovering Changes") {
+        cleanWs()
+        checkout([
+            $class: 'GitSCM',
+            branches: scm.branches + [[name: '*/master']],
+            userRemoteConfigs: scm.userRemoteConfigs
+        ])        
     }
+}
 
-    post {
-        success {
-            echo 'This will run if the pipeline succeeds.'
-        }
-        failure {
-            echo 'This will run if the pipeline fails.'
-        }
+ansiColor('xterm') {
+    timeout(30) {
+        parallel containerBuildStages
     }
 }

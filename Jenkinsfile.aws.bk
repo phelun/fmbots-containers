@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('FmDecDemo') {
+            steps {
+                echo 'Hello, World!'
+            }
+        }
+        stage('FigoMina') {
+            steps {
+                echo 'Trying this out'
+            }
+        }        
+    }
+
+    post {
+        success {
+            echo 'This will run if the pipeline succeeds.'
+        }
+        failure {
+            echo 'This will run if the pipeline fails.'
+        }
+    }
+}
