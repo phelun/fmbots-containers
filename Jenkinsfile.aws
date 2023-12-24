@@ -29,7 +29,7 @@ node() {
 }
 
 ansiColor('xterm') {
-    timeout(30) {
-        parallel containerBuildStages
-    }
+    // timeout(30) {
+    //     parallel containerBuildStages
+    // }
 }
