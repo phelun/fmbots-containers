@@ -33,7 +33,8 @@ node() {
             userRemoteConfigs: scm.userRemoteConfigs
         ])
         output = getPRChangelog()
-        currentBuild.description = "Pushed containers:<br>"        
+        currentBuild.description = "Pushed containers:<br>"    
+        println getPRChangelog     
     }
 }
 
