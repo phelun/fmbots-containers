@@ -17,7 +17,7 @@ def getChangedDirectories(changeLog) {
         .unique()
 }
 
-node("master") {
+node("any") {
     stage("Discovering Changes") {
         cleanWs()
         checkout([
