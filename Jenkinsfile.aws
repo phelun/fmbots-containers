@@ -22,6 +22,7 @@ def getChangedDirectories(changeLog) {
         .unique()
 }
 
+
 // AgentWorker 
 node() {
     stage("Discovering Changes") {
@@ -31,12 +32,10 @@ node() {
             branches: scm.branches + [[name: '*/master']],
             userRemoteConfigs: scm.userRemoteConfigs
         ])
+        output = getPRChangelog()
         currentBuild.description = "Pushed containers:<br>"        
     }
 }
 
 ansiColor('xterm') {
-    // timeout(30) {
-    //     parallel containerBuildStages
-    // }
 }
