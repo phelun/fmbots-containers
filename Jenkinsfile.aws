@@ -22,9 +22,14 @@ pipeline {
     stages {
         stage("Prepare") {
             steps {
-                bitbucketStatusNotify buildState: "INPROGRESS"
+                sh "echo  helloworldPrepare"
             }
         }
+        stage("Build") {
+            steps {
+                sh "echo  helloworldBuild"
+            }
+        }        
     }    
 
 }
