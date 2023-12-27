@@ -30,6 +30,19 @@ pipeline {
                 sh "echo  helloworldBuild"
             }
         }        
-    }    
+    }  
+    post {
+        always {
+            sh "echo AlwaysRuns"
+        }
+
+        success {
+            sh "echo RunsUponSuccess"
+        }
+
+        failure {
+            sh "echo RunsUponFailure"
+        }
+    }      
 
 }
