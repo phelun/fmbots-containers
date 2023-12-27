@@ -36,7 +36,12 @@ pipeline {
                     steps {
                         sh "echo  helloworldPrepare2"
                     }
-                }                 
+                }
+                stage('Prep3'){
+                    steps {
+                        sh "echo  helloworldPrepare3"
+                    }
+                }                                   
             }       
         }
         stage("Build") {
