@@ -47,7 +47,7 @@ pipeline {
         stage("Build and Publish Image") {
             // when {
             //     branch 'master'
-            }
+            // }
             steps {
                 sh """
                 echo  helloworldBuild
