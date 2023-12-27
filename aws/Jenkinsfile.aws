@@ -50,6 +50,7 @@ pipeline {
             // }
             steps {
                 sh """
+                whoami 
                 echo  helloworldBuild
                 docker version
                 """
