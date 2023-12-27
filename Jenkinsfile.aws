@@ -1,41 +1,30 @@
-// @Library("devops-gsl-pipelines")_
+#!/usr/bin/env groovy
 
+pipeline {
+    agent { node }
 
-def containerBuildStages = [failFast: false]
-String branchName = env.CHANGE_ID ? env.CHANGE_BRANCH : env.BRANCH_NAME
-def branch = (env.CHANGE_ID) ? env.CHANGE_BRANCH : env.BRANCH_NAME;
-def changes = []
-def whatToBuild = []
-def gitHash
+    environment {
+        TEST_PREFIX = "test-IMAGE"
+        // TEST_IMAGE = "${env.TEST_PREFIX}:${env.BUILD_NUMBER}"
+        // TEST_CONTAINER = "${env.TEST_PREFIX}-${env.BUILD_NUMBER}"
+        // REGISTRY_ADDRESS = "my.registry.address.com"
 
-def getPRChangelog() {
-    return sh(
-            script: "git --no-pager diff origin/master --name-only",
-            returnStdout: true
-    ).split('\n')
-}
+        // SLACK_CHANNEL = "#deployment-notifications"
+        // SLACK_TEAM_DOMAIN = "MY-SLACK-TEAM"
+        // SLACK_TOKEN = credentials("slack_token")
+        // DEPLOY_URL = "https://deployment.example.com/"
 
-def getChangedDirectories(changeLog) {
-    return changeLog
-        .findAll{ it.contains("/") } // Must be directory
-        .collect{ it.split("/").init().join("/") } // Skip filename
-        .unique()
-}
+        // COMPOSE_FILE = "docker-compose.yml"
+        // REGISTRY_AUTH = credentials("docker-registry")
+        // STACK_PREFIX = "my-project-stack-name"
+    }    
 
+    stages {
+        stage("Prepare") {
+            steps {
+                bitbucketStatusNotify buildState: "INPROGRESS"
+            }
+        }
+    }    
 
-// AgentWorker 
-node() {
-    stage("Discovering Changes") {
-        cleanWs()
-        checkout([
-            $class: 'GitSCM',
-            branches: scm.branches + [[name: '*/master']],
-            userRemoteConfigs: scm.userRemoteConfigs
-        ])
-        output = getPRChangelog()
-        currentBuild.description = "Pushed containers:<br>"        
-    }
-}
-
-ansiColor('xterm') {
 }
