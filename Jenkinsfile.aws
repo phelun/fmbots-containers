@@ -21,7 +21,7 @@ pipeline {
 
         // COMPOSE_FILE = "docker-compose.yml"
         // REGISTRY_AUTH = credentials("docker-registry")
-        // STACK_PREFIX = "my-project-stack-name"
+        /// STACK_PREFIX = "my-project-stack-name"
     }    
 
     stages {
