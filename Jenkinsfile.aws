@@ -34,7 +34,7 @@ pipeline {
                 } 
                 stage('Prep2'){
                     steps {
-                        sh "echo  helloworldPrepare2"
+                        sh "echo  helloworldPrepare2
                     }
                 }
                 stage('Prep3'){
