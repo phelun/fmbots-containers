@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent { node }
+    agent { any }
 
     environment {
         TEST_PREFIX = "test-IMAGE"
