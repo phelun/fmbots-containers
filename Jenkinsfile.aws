@@ -3,6 +3,11 @@
 pipeline {
     agent any 
 
+    options {
+        timestamps()
+    }
+
+
     environment {
         TEST_PREFIX = "test-IMAGE"
         // TEST_IMAGE = "${env.TEST_PREFIX}:${env.BUILD_NUMBER}"
@@ -21,9 +26,18 @@ pipeline {
 
     stages {
         stage("Prepare") {
-            steps {
-                sh "echo  helloworldPrepare"
-            }
+            parallel {
+                stage('Prep1'){
+                    steps {
+                        sh "echo  helloworldPrepare"
+                    }
+                } 
+                stage('Prep2'){
+                    steps {
+                        sh "echo  helloworldPrepare2"
+                    }
+                }                 
+            }       
         }
         stage("Build") {
             steps {
