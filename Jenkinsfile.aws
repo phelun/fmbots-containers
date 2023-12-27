@@ -25,14 +25,14 @@ pipeline {
     }    
 
     stages {
-        stage("Prepare") {
+        stage("Quality Analysis") {
             parallel {
-                stage('Prep1'){
+                stage('Integration Test'){
                     steps {
                         sh "echo  helloworldPrepare"
                     }
                 } 
-                stage('Prep2'){
+                stage('Sonar Scan'){
                     steps {
                         sh "echo  helloworldPrepare2"
                     }
@@ -44,7 +44,7 @@ pipeline {
                 }                                   
             }       
         }
-        stage("Build") {
+        stage("Build and Publish Image") {
             steps {
                 sh "echo  helloworldBuild"
             }
