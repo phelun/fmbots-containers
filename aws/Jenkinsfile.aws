@@ -48,8 +48,8 @@ pipeline {
             steps {
                 dir('aws/eks-kube-hunter'){
                     sh 'docker build -t 658951324167.dkr.ecr.eu-west-1.amazonaws.com/eks-kube-hunter:v0.1 .'
-                    sh 'ECR_LOGIN=$(aws ecr get-login-password --region eu-west-1)'
-                    sh 'docker login -u AWS -p "${ECR_LOGIN}" 658951324167.dkr.ecr.eu-west-1.amazonaws.com'                    
+                    // sh 'ECR_LOGIN=$(aws ecr get-login-password --region eu-west-1)'
+                    // sh 'docker login -u AWS -p "${ECR_LOGIN}" 658951324167.dkr.ecr.eu-west-1.amazonaws.com'                    
                     sh 'docker push 658951324167.dkr.ecr.eu-west-1.amazonaws.com/eks-kube-hunter:v0.1'
 
                     sh 'pwd && ls -l'
