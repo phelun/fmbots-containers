@@ -51,7 +51,7 @@ pipeline {
                     script {
                         def ecrLogin = sh(
                             returnStdout: true, 
-                            script: "aws ecr get-login-password --region eu-west-1 658951324167"
+                            script: "aws ecr get-login-password --region eu-west-1"
                         ).trim()
                     }
                     // sh 'ECR_LOGIN=$(aws ecr get-login-password --region eu-west-1)'
