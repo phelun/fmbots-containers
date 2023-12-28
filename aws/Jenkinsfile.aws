@@ -25,9 +25,9 @@ pipeline {
     }    
 
     stages {
-        stage("Quality Analysis") {
+        stage("DockerFileChecks") {
             parallel {
-                stage('Integration Test'){
+                stage('Lints'){
                     steps {
                         sh "echo  helloworldPrepare"
                     }
@@ -47,6 +47,7 @@ pipeline {
                         dir('aws/eks-kube-hunter'){
                             sh 'docker ps'
                             sh 'docker version'
+                            sh 'pwd && ls -l'
                         }
                     }
                 }
