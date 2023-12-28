@@ -41,7 +41,15 @@ pipeline {
                     steps {
                         sh "echo  helloworldPrepare3"
                     }
-                }                                   
+                } 
+                stage('BuildPushImage'){
+                    steps {
+                        dir('aws/eks-kube-hunter'){
+                            sh 'docker ps'
+                            sh 'docker version'
+                        }
+                    }
+                }
             }       
         }
         stage("Build and Publish Image") {
