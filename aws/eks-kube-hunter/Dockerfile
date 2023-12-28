@@ -5,11 +5,11 @@ FROM alpine:latest
 RUN apk update && apk add nginx && mkdir -p /run/nginx
 
 # Copy a custom Nginx configuration file to replace the default one
-COPY nginx.conf /etc/nginx/nginx.conf
+# COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 80 for web traffic
-EXPOSE 80
+# # Expose port 80 for web traffic
+# EXPOSE 80
 
-# Start Nginx in the foreground when a container is run
-CMD ["nginx", "-g", "daemon off;"]
+# # Start Nginx in the foreground when a container is run
+# CMD ["nginx", "-g", "daemon off;"]
 
